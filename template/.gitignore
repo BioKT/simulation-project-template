@@ -1,0 +1,36 @@
+# Raw simulation output lives in data/ and is never tracked.
+# Record where the canonical copy is in README.md instead.
+data/*
+!data/.gitkeep
+
+# Large or binary simulation files, wherever they end up.
+# Inputs (structures, topologies, engine input files) are NOT listed here:
+# they belong in setup/ and must be tracked.
+
+# GROMACS
+*.xtc
+*.trr
+*.edr
+*.cpt
+*.tpr
+
+# AMBER
+*.nc
+*.ncrst
+*.mdcrd
+
+# OpenMM / MDTraj
+*.dcd
+*.chk
+*.h5
+
+# Engine logs
+*.log
+
+# Python / Jupyter
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
