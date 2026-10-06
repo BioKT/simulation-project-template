@@ -27,22 +27,27 @@ its README.
 new_simulation_project.sh IDPs/as4_fibril
 ```
 
-This creates `~/Research/Projects/IDPs/as4_fibril/`, initialises a git
-repository with an initial commit, and creates a private repository
-`BioKT/as4_fibril` on GitHub with that commit pushed to it.
+This creates `~/Research/Projects/IDPs/as4_fibril/` and initialises a git
+repository with an initial commit. Add `--github` to also create a private
+repository `BioKT/as4_fibril` on GitHub with that commit pushed to it:
+
+```bash
+new_simulation_project.sh --github IDPs/as4_fibril
+```
 
 | Option | Effect |
 |--------|--------|
-| `--no-github` | Local git repository only |
+| `--github` | Also create a private GitHub repository and push to it |
 | `--org NAME` | GitHub organisation (default `BioKT`) |
 | `--root DIR` | Projects root (default `~/Research/Projects`) |
 
-The script checks everything first (name, existing folder, git identity,
-`gh` login, existing GitHub repository) and creates nothing if a check fails.
+The script checks everything first (name, existing folder, git identity and,
+with `--github`, the `gh` login and whether the GitHub repository already
+exists) and creates nothing if a check fails.
 
 ## Installation
 
-Requires bash, git and, unless you use `--no-github`, the
+Requires bash and git. For `--github`, the
 [GitHub CLI](https://cli.github.com) logged in with `gh auth login`.
 
 ```bash

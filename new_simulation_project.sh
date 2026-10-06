@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 # Create a new simulation project from the BioKT template:
 # standard folders, README to fill in, .gitignore, a local git repository
-# with an initial commit and, by default, a private GitHub repository.
+# with an initial commit and, with --github, a private GitHub repository.
 set -euo pipefail
 
 ROOT="${HOME}/Research/Projects"
 ORG="BioKT"
-GITHUB=1
+GITHUB=0
 
 usage() {
     cat <<EOF
@@ -15,13 +15,13 @@ Usage: $(basename "$0") [options] <Category>/<Project>
 Creates <root>/<Category>/<Project> from the project template.
 
 Options:
-  --no-github     Do not create a GitHub repository (local git only)
+  --github        Also create a private GitHub repository and push to it
   --org NAME      GitHub organisation (default: ${ORG})
   --root DIR      Projects root (default: ${ROOT})
   -h, --help      Show this help
 
 Example:
-  $(basename "$0") IDPs/as4_fibril
+  $(basename "$0") --github IDPs/as4_fibril
 EOF
 }
 
@@ -29,7 +29,7 @@ die() { echo "Error: $*" >&2; exit 1; }
 
 while [ $# -gt 0 ]; do
     case "$1" in
-        --no-github) GITHUB=0; shift ;;
+        --github) GITHUB=1; shift ;;
         --org)  [ $# -ge 2 ] || die "--org needs a value";  ORG="$2";  shift 2 ;;
         --root) [ $# -ge 2 ] || die "--root needs a value"; ROOT="$2"; shift 2 ;;
         -h|--help) usage; exit 0 ;;
@@ -73,9 +73,9 @@ AUTHOR="$(git config user.name || true)"
 
 if [ "$GITHUB" -eq 1 ]; then
     command -v gh >/dev/null 2>&1 \
-        || die "GitHub CLI 'gh' not found; install it or use --no-github"
+        || die "GitHub CLI 'gh' not found; install it or drop --github"
     gh auth status >/dev/null 2>&1 \
-        || die "'gh' is not logged in; run 'gh auth login' or use --no-github"
+        || die "'gh' is not logged in; run 'gh auth login' or drop --github"
     gh repo view "$ORG/$PROJECT" >/dev/null 2>&1 \
         && die "GitHub repository $ORG/$PROJECT already exists; choose another project name"
 fi
@@ -108,6 +108,9 @@ if [ "$GITHUB" -eq 1 ]; then
         echo "  gh repo create $ORG/$PROJECT --private --source . --remote origin --push" >&2
         exit 1
     fi
+else
+    echo "No GitHub repository created. To add one later, from $TARGET run:"
+    echo "  gh repo create $ORG/$PROJECT --private --source . --remote origin --push"
 fi
 
 echo "Next: fill in README.md (system, engine, force field, where the data lives)."
