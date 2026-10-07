@@ -52,12 +52,20 @@ Requires bash and git. For `--github`, the
 
 ```bash
 git clone git@github.com:BioKT/simulation-project-template.git
-mkdir -p ~/bin
-ln -s "$PWD/simulation-project-template/new_simulation_project.sh" ~/bin/
+mkdir -p ~/.local/bin
+ln -s "$PWD/simulation-project-template/new_simulation_project.sh" ~/.local/bin/
 ```
 
-Make sure `~/bin` is on your `PATH`. The script finds the `template/`
-folder through the symlink, so `git pull` in the clone updates both.
+Make sure `~/.local/bin` is on your `PATH`. On most Linux systems it is added
+automatically at your next login once the folder exists. On macOS and on HPC
+clusters you may need to add it yourself, e.g. in `~/.zshrc` or `~/.bashrc`:
+
+```bash
+export PATH="$HOME/.local/bin:$PATH"
+```
+
+The script finds the `template/` folder through the symlink, so `git pull` in
+the clone updates both.
 
 ## Changing the template
 
