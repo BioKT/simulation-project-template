@@ -45,6 +45,21 @@ The script checks everything first (name, existing folder, git identity and,
 with `--github`, the `gh` login and whether the GitHub repository already
 exists) and creates nothing if a check fails.
 
+## Examples
+
+`examples/` holds engine-specific starting points. They are **not** copied
+into new projects; copy what you need by hand.
+
+| Path | What it is |
+|------|------------|
+| `examples/gromacs/run_md.sh` | Schematic GROMACS setup script (prep, EM, NVT, NPT, production), one stage per call, with every file name built from system, force field, water model, temperature and replica. Copy to `scripts/` and adapt. |
+| `examples/gromacs/mdp/ions.mdp` | The `.mdp` for the `.tpr` that `genion` reads: cutoff electrostatics, so `grompp` does not warn about PME with a net charge. Copy to `setup/mdp/`. |
+
+The other `.mdp` templates (`em`, `nvt`, `npt`, `md`) are not provided:
+cutoffs and related settings depend on the force field. The script is
+explained in Chapter 3, §6.1 of the
+[BIOKT Lab Handbook](https://github.com/BioKT/lab-handbook).
+
 ## Installation
 
 Requires bash and git. For `--github`, the
