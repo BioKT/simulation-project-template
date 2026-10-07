@@ -52,7 +52,7 @@ into new projects; copy what you need by hand.
 
 | Path | What it is |
 |------|------------|
-| `examples/gromacs/run_md.sh` | Schematic GROMACS setup script (prep, EM, NVT, NPT, production), one stage per call, with every file name built from system, force field, water model, temperature and replica. Copy to `scripts/` and adapt. |
+| `examples/gromacs/run_md.sh` | Schematic GROMACS setup script: topology, box, solvent, ions, EM, then NVT, NPT and production for each replica, one explicit step after another, with every file name built from system, force field, water model, temperature and replica. Copy to `scripts/` and adapt. |
 | `examples/gromacs/mdp/ions.mdp` | The `.mdp` for the `.tpr` that `genion` reads: cutoff electrostatics, so `grompp` does not warn about PME with a net charge. Copy to `setup/mdp/`. |
 
 The other `.mdp` templates (`em`, `nvt`, `npt`, `md`) are not provided:
