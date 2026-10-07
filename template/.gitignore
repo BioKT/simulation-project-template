@@ -7,7 +7,8 @@ data/*
 # Inputs (structures, topologies, engine input files) are NOT listed here:
 # they belong in setup/ and must be tracked.
 
-# GROMACS
+# GROMACS (\#*# matches the backups GROMACS makes instead of overwriting, e.g. #topol.top.1#)
+\#*#
 *.xtc
 *.trr
 *.edr

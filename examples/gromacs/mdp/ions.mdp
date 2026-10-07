@@ -1,0 +1,10 @@
+; Only used to build the .tpr that genion reads; never simulated.
+; Plain cutoff electrostatics, because the system is not neutral yet
+; and grompp rightly warns about PME with a net charge.
+integrator    = steep
+nsteps        = 50000
+emtol         = 1000
+cutoff-scheme = Verlet
+coulombtype   = Cut-off
+rcoulomb      = 1.0
+rvdw          = 1.0
